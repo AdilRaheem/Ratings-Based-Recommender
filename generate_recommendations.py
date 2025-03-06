@@ -8,7 +8,7 @@ import json
 
 def main():
     # Load dataset
-    file_path = "C:/Users/USER/Downloads/marketing_sample_for_walmart_com-walmart_com_product_review__20200701_20201231__5k_data.tsv"
+    file_path = "product_ratings.tsv"
     train_data = pd.read_csv(file_path, sep='\t')
 
     # Column renaming
