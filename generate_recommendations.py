@@ -10,7 +10,7 @@ def main():
     # Load dataset
     file_path = "product_ratings.tsv"
     train_data = pd.read_csv(file_path, sep='\t')
-
+    train_data= train_data[:1500]
     # Column renaming
     column_name_mapping = {
         'Uniq Id': 'ID',
