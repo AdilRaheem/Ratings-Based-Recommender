@@ -5,32 +5,12 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import json
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-
-def load_data_from_google_sheets(sheet_name):
-    """Fetch dataset from Google Sheets."""
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    
-    # Load credentials from JSON key file
-    creds = ServiceAccountCredentials.from_json_keyfile_name("database-for-recommendation-4245c30a6549.json", scope)
-    client = gspread.authorize(creds)
-
-    # Open the Google Sheet
-    spreadsheet = client.open(sheet_name)
-    worksheet = spreadsheet.sheet1  # Access first sheet
-
-    # Convert to DataFrame
-    data = worksheet.get_all_records()
-    df = pd.DataFrame(data)
-    return df
 
 def main():
-    # Load dataset from Google Sheets
-    sheet_name = "Ratings-based-Data"  # actual sheet name
-    train_data = load_data_from_google_sheets(sheet_name)
-    train_data = train_data[:1500]
-
+    # Load dataset
+    file_path = "product_ratings.tsv"
+    train_data = pd.read_csv(file_path, sep='\t')
+    train_data= train_data[:1500]
     # Column renaming
     column_name_mapping = {
         'Uniq Id': 'ID',
